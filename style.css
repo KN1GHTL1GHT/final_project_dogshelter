@@ -97,8 +97,12 @@ h1 {
   min-height: 0;
 }
 
+/* The dots are painted on the canvas; the SVG with labels sits on top of it */
+.chart canvas,
 .chart svg {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 }
@@ -202,21 +206,6 @@ h1 {
 
 /* ---------- Chart pieces ---------- */
 
-.dot {
-  stroke: rgba(42, 37, 32, 0.55);
-  stroke-width: 0.6;
-}
-
-.dot.is-hovered {
-  stroke: var(--accent);
-  stroke-width: 2.5;
-}
-
-.grid-line {
-  stroke: var(--rule);
-  stroke-width: 1;
-}
-
 .axis-label,
 .column-label,
 .column-count {
@@ -235,12 +224,6 @@ h1 {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-}
-
-.median-line {
-  stroke: var(--ink);
-  stroke-width: 2.5;
-  stroke-linecap: round;
 }
 
 .median-label {
