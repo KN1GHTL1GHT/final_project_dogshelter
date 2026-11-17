@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How long do Austin's shelter dogs wait?</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="page-header">
+    <p class="kicker">Austin Animal Center &middot; May 2025 to today</p>
+    <h1>How long do Austin's shelter dogs wait?</h1>
+    <p class="intro">
+      Each dot is one dog's stay at the shelter, from the day it came in to
+      the day it left. The higher the dot, the longer the wait. Scroll to
+      sort the same dogs in different ways.
+    </p>
+  </header>
+
+  <main class="scrolly">
+    <!-- The chart stays pinned while the steps scroll past it -->
+    <section class="chart-panel" aria-label="Beeswarm chart of shelter stays">
+      <h2 id="chart-title" class="chart-title">Loading dogs&hellip;</h2>
+      <ul id="legend" class="legend" aria-label="Dot colors: coat color groups"></ul>
+      <div id="chart" class="chart">
+        <svg id="swarm" role="img" aria-labelledby="chart-title" aria-describedby="chart-summary"></svg>
+        <div id="tooltip" class="tooltip" hidden></div>
+      </div>
+      <!-- Screen-reader summary of whatever the chart is showing right now -->
+      <div id="chart-summary" class="visually-hidden" aria-live="polite"></div>
+    </section>
+
+    <div class="steps">
+      <article class="step" data-view="color">
+        <h2>Sorted by coat color</h2>
+        <p>
+          Dogs are lined up by the main coat color the shelter wrote down.
+          Height shows days in the shelter, on a stretched scale so the
+          many short stays don't pile into one corner.
+        </p>
+        <p class="step-stat" id="stat-color"></p>
+      </article>
+
+      <article class="step" data-view="color">
+        <h2>Look for the short line</h2>
+        <p>
+          The dark line in each column is the median: half of that group
+          left sooner, half waited longer. Hover or tap a dot to meet the dog.
+        </p>
+      </article>
+
+      <article class="step" data-view="age">
+        <h2>Now sorted by age</h2>
+        <p>
+          Same dogs, same heights. Each dot only slides sideways into a
+          column for how old the dog was on the day it arrived. Dots keep
+          their coat color so you can follow them.
+        </p>
+        <p class="step-stat" id="stat-age"></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <p>
+      Data: <a href="https://data.austintexas.gov/d/gsvs-ypi7">Austin Animal Center Outcomes</a>,
+      City of Austin open data portal. A random sample of 1,000 dog and puppy stays.
+    </p>
+  </footer>
+</body>
+</html>

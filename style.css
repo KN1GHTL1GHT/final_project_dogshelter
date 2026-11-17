@@ -1,0 +1,282 @@
+:root {
+  --paper: #f5f0e6;
+  --panel: #fbf8f1;
+  --ink: #2a2520;
+  --ink-soft: #6b6156;
+  --rule: #d9cfbf;
+  --accent: #b5532a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+h1,
+h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* ---------- Header and footer ---------- */
+
+.page-header {
+  max-width: 44rem;
+  padding: 3rem 1rem 2rem;
+  margin: 0 auto;
+}
+
+.kicker {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+}
+
+.intro {
+  margin: 1rem 0 0;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+}
+
+.page-footer {
+  padding: 2rem 1rem 3rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.page-footer a {
+  color: inherit;
+}
+
+/* ---------- Scrolling layout (mobile first) ---------- */
+
+/* Mobile: chart pinned to the top, steps scroll underneath it */
+.scrolly {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-panel {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 64vh;
+  height: 64svh;
+  padding: 0.6rem 0.5rem 0.25rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--rule);
+}
+
+.chart-title {
+  font-size: 1.05rem;
+  padding: 0 0.25rem;
+}
+
+.chart {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 30vh;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60vh;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+
+.step.is-active {
+  opacity: 1;
+}
+
+.step h2 {
+  font-size: 1.5rem;
+}
+
+.step p {
+  margin: 0.6rem 0 0;
+}
+
+.step-stat {
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--accent);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* Desktop: steps on the left, chart pinned on the right */
+@media (min-width: 800px) {
+  .scrolly {
+    flex-direction: row-reverse;
+    max-width: 82rem;
+    margin: 0 auto;
+  }
+
+  .chart-panel {
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+    padding: 1.25rem 1.25rem 0.75rem;
+    border-bottom: none;
+    border-left: 1px solid var(--rule);
+  }
+
+  .chart-title {
+    font-size: 1.4rem;
+  }
+
+  .steps {
+    flex: 0 0 20rem;
+    padding: 0 2rem 10vh;
+  }
+
+  .step {
+    min-height: 90vh;
+  }
+}
+
+/* ---------- Legend ---------- */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.7rem;
+  margin: 0.35rem 0 0;
+  padding: 0 0.25rem;
+  list-style: none;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.legend .swatch {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 37, 32, 0.55);
+}
+
+@media (min-width: 800px) {
+  .legend {
+    font-size: 0.8rem;
+  }
+}
+
+/* ---------- Chart pieces ---------- */
+
+.dot {
+  stroke: rgba(42, 37, 32, 0.55);
+  stroke-width: 0.6;
+}
+
+.dot.is-hovered {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.grid-line {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.axis-label,
+.column-label,
+.column-count {
+  fill: var(--ink-soft);
+  font-size: 11px;
+}
+
+.column-label {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+.axis-title {
+  fill: var(--ink-soft);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.median-line {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.median-label {
+  fill: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: var(--panel);
+  stroke-width: 3px;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  max-width: 14rem;
+  padding: 0.5rem 0.65rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.tooltip strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+/* ---------- Helpers ---------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
